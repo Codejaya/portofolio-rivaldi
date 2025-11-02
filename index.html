@@ -4,11 +4,30 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Rivaldi Hidayatullah — Portofolio</title>
-  <meta name="description" content="Portofolio Rivaldi Hidayatullah — Web Developer & IT Support" />
+
+  <!-- 🔹 SEO & Open Graph Optimization -->
+  <meta name="description" content="Portofolio profesional Rivaldi Hidayatullah — Web Developer, IT Support, dan IT Business Analyst.">
+  <meta name="keywords" content="Rivaldi Hidayatullah, Web Developer, IT Support, IT Business Analyst, Portofolio, Programmer Indonesia">
+  <meta name="author" content="Rivaldi Hidayatullah">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Portofolio Rivaldi Hidayatullah — Web Developer & IT Support">
+  <meta property="og:description" content="Portofolio profesional Rivaldi Hidayatullah. Menampilkan proyek, pengalaman, dan sertifikasi.">
+  <meta property="og:image" content="images/profile.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rivaldi22.github.io/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portofolio Rivaldi Hidayatullah">
+  <meta name="twitter:description" content="Web Developer & IT Support | Portofolio Profesional">
+  <meta name="twitter:image" content="images/profile.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="images/profile.png">
 </head>
+
 <body>
   <header class="site-header">
     <nav class="nav container">
@@ -27,20 +46,28 @@
 
   <main>
     <section class="hero">
-      <div class="hero-inner container">
-        <div class="profile-wrap">
-          <img src="images/profile.png" alt="Foto profil Rivaldi Hidayatullah" class="profile-img">
-        </div>
-        <h1 class="name">Rivaldi Hidayatullah</h1>
-        <p class="role">Web Developer &amp; IT Support &amp; IT Business Analyst</p>
-        
-        <div class="hero-links">
-          <a href="mailto:rivaldihidayatullah00@gmail.com" class="btn">Email</a>
-          <a href="https://github.com/Rivaldi22" target="_blank" class="btn">GitHub</a>
-          <a href="files/CV Rivaldi Hidayatullah1.pdf" class="btn" download>📄 Download CV</a>
-        </div>
-      </div>
-    </section>
+  <div class="hero-inner container">
+    <div class="profile-wrap">
+      <img src="images/profile.png" alt="Foto profil Rivaldi Hidayatullah" class="profile-img" id="profileImg">
+    </div>
+    <h1 class="name">Rivaldi Hidayatullah</h1>
+    <p class="role">Web Developer &amp; IT Support &amp; IT Business Analyst</p>
+    
+    <div class="hero-links">
+      <a href="mailto:rivaldihidayatullah00@gmail.com" class="btn">Email</a>
+      <a href="https://github.com/Rivaldi22" class="btn">GitHub</a>
+      <a href="files/CV Rivaldi Hidayatullah1.pdf" class="btn" download>📄 Download CV</a>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ Modal pop-up untuk foto profil -->
+<div id="imgModal" class="img-modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="imgFull">
+  <div id="caption"></div>
+</div>
+
 
     <section id="about" class="section container">
       <h2>About Me</h2>
@@ -77,7 +104,7 @@
       </div>
       <div class="card">
         <h3>Pengabdian Kepada Masyarakat (PKM)</h3>
-        <p>Nov 2023 — Workshop CMS WordPress & pembuatan website untuk siswa SMK Tekno Multimedia.</p>
+        <p>Workshop CMS WordPress & pembuatan website untuk siswa SMK Tekno Multimedia. -&nbsp; November 2023</p>
       </div>
     </section>
 
@@ -122,15 +149,26 @@
         <img src="images/project3-1.png" class="active" alt="Inventory 1">
         <img src="images/project3-2.png" alt="Inventory 2">
         <img src="images/project3-3.png" alt="Inventory 3">
+        <img src="images/project3-4.png" alt="Inventory 4">
         <button class="prev">&#10094;</button>
         <button class="next">&#10095;</button>
       </div>
-      <h3>Aplikasi Web Manajemen Inventory Perpustakaan</h3>
-      <p>Sistem inventory buku dengan landing page informatif dan database MySQL.</p>
-      <div class="project-links">
-        <a href="https://rivaldi22.github.io/perpustakaan" target="_blank" class="btn">View Demo</a>
-        <a href="https://github.com/Rivaldi22/perpustakaan" target="_blank" class="btn-outline">Source Code</a>
+      <h3>Aplikasi Web Apotek21</h3>
+      <p>Sistem manajemen penjualan obat-obatan apotek21 dengan landing page informatif dan database MySQL.</p>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-card">
+      <div class="carousel">
+        <img src="images/project4-1.png" class="active" alt="Inventory 1">
+        <img src="images/project4-2.png" alt="Inventory 2">
+        <img src="images/project4-3.png" alt="Inventory 3">
+        
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
       </div>
+      <h3>Aplikasi Web Payment</h3>
+      <p>Sistem manajemen data pembayaran atau tagihan customer dengan menggunakan python dan database MySQL.</p>
     </div>
 
   </div>
@@ -140,21 +178,40 @@
       <h2>Skills</h2>
       <div class="skills-grid">
         <div class="skill"><label>HTML &amp; CSS</label><div class="bar"><span style="width:90%"></span></div></div>
+        <div class="skill"><label>python</label><div class="bar"><span style="width:80%"></span></div></div>
         <div class="skill"><label>PHP &amp; MySQL</label><div class="bar"><span style="width:85%"></span></div></div>
         <div class="skill"><label>JavaScript</label><div class="bar"><span style="width:75%"></span></div></div>
+        <div class="skill"><label>Microsoft Office</label><div class="bar"><span style="width:90%"></span></div></div>
         <div class="skill"><label>Bootstrap &amp; Laravel</label><div class="bar"><span style="width:70%"></span></div></div>
       </div>
     </section>
 
     <section id="contact" class="section container contact-section">
-      <h2>Contact</h2>
-      <div class="card contact-card">
-        <p><strong>Email:</strong> <a href="mailto:rivaldihidayatullah00@gmail.com">rivaldihidayatullah00@gmail.com</a></p>
-        <p><strong>LinkedIn:</strong> <a href="https://id.linkedin.com/in/rivaldi-hidayatullah" target="_blank">linkedin.com/in/rivaldi-hidayatullah</a></p>
-        <p><strong>GitHub:</strong> <a href="https://github.com/Rivaldi22" target="_blank">github.com/Rivaldi22</a></p>
-        <p><strong>Location:</strong> Tangerang Selatan, Banten</p>
-      </div>
-    </section>
+  <h2>Contact</h2>
+  <div class="card contact-card">
+    <p>Silakan hubungi saya melalui form berikut atau media sosial di bawah ini 👇</p>
+
+    <form action="https://formsubmit.co/hidayatvaldi22@gmail.com" method="POST" class="contact-form">
+  <input type="text" name="name" placeholder="Nama Anda" required>
+  <input type="email" name="email" placeholder="Email Anda" required>
+  <textarea name="message" placeholder="Pesan Anda..." required></textarea>
+
+  <!-- anti spam -->
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://rivaldi22.github.io/#contact">
+
+  <button type="submit" class="btn">Kirim Pesan</button>
+</form>
+
+    <div class="social-links">
+      <p><strong>Email:</strong> <a href="mailto:rivaldihidayatullah00@gmail.com">rivaldihidayatullah00@gmail.com</a></p>
+      <p><strong>LinkedIn:</strong> <a href="https://id.linkedin.com/in/rivaldihidayatullah" target="_blank">linkedin.com/in/rivaldi-hidayatullah</a></p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/Rivaldi22" target="_blank">github.com/Rivaldi22</a></p>
+      <p><strong>Location:</strong> Tangerang Selatan, Banten</p>
+    </div>
+  </div>
+</section>
+
   </main>
 
   <footer class="site-footer">
@@ -162,7 +219,6 @@
       <p>© <span id="year"></span> Rivaldi Hidayatullah</p>
     </div>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
