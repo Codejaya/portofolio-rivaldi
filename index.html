@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rivaldi Hidayatullah | IT System Analyst & Web Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="./assets/img/apple-touch-icon.png">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .nav-blur { background: rgba(19, 18, 19, 0.9); backdrop-filter: blur(10px); }
+        .timeline-container { position: relative; border-left: 2px solid #F8F6F0; padding-left: 2.5rem; margin-left: 0.75rem; }
+        .timeline-dot { position: absolute; left: -10px; top: 6px; width: 18px; height: 18px; background: #000000; 
+            border: 4px solid #F8F6F0; border-radius: 50%; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .timeline-dot-old { background: #F8F6F0; }
+        .swiper { width: 100%; height: auto; }
+        .swiper-pagination-bullet-active { background: #4f46e5 !important; }
+    </style>
+</head>
+<body class="bg-[#fafafa] text-slate-900 selection:bg-indigo-100 selection:text-indigo-700">
+    <div id="loader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-slate-950 transition-opacity duration-500">
+    <div class="relative">
+        <div class="w-16 h-16 border-4 border-indigo-200 dark:border-slate-800 border-t-indigo-600 rounded-full animate-spin"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="w-2 h-2 bg-indigo-600 rounded-full animate-pulse"></div>
+        </div>
+    </div>
+</div>
+    <nav class="fixed w-full z-[100] nav-blur border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-800 tracking-tighter bg-indigo-600 bg-clip-text text-transparent italic">MYPORTOFOLIO</a>
+            
+            <div class="hidden md:flex items-center space-x-10 text-[12px] font-700 uppercase tracking-widest text-slate-500">
+                <a href="#about" data-key="nav_about" class="hover:text-indigo-600 transition">Profil</a>
+                <a href="#experience" data-key="nav_experience" class="hover:text-indigo-600 transition">Experience</a>
+                <a href="#projects" data-key="nav_projects" class="hover:text-indigo-600 transition">Projects</a>
+                <a href="#contact" data-key="nav_contact" class="hover:text-indigo-600 transition">Contact</a>
+                
+                <div class="flex items-center space-x-2 border-l border-slate-300 ml-4 pl-6">
+                    <button onclick="setLanguage('id')" id="lang-id-desktop" class="transition-colors duration-300 focus:outline-none text-indigo-600">ID</button>
+                    <span class="text-slate-300">/</span>
+                    <button onclick="setLanguage('en')" id="lang-en-desktop" class="transition-colors duration-300 focus:outline-none hover:text-indigo-600">EN</button>
+                </div>
+            </div>
+
+            <button id="menu-btn" class="md:hidden text-slate-600 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 w-full max-w-xs bg-white z-[150] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+        <div class="flex justify-end p-6">
+            <button id="close-menu" class="text-slate-600 focus:outline-none hover:text-indigo-600 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex flex-col p-10 pt-4 space-y-8 text-lg font-700 uppercase tracking-widest text-slate-600">
+            <a href="#about" data-key="nav_about" class="mobile-link hover:text-indigo-600 transition">Profil</a>
+            <a href="#experience" data-key="nav_experience" class="mobile-link hover:text-indigo-600 transition">Experience</a>
+            <a href="#projects" data-key="nav_projects" class="mobile-link hover:text-indigo-600 transition">Projects</a>
+            <a href="#contact" data-key="nav_contact" class="mobile-link hover:text-indigo-600 transition">Contact</a>
+            
+            <div class="flex gap-4 pt-6 border-t border-slate-100 text-sm">
+                <button onclick="setLanguage('id')" id="lang-id-mobile" class="font-bold text-indigo-600">ID</button>
+                <span class="text-slate-300">|</span>
+                <button onclick="setLanguage('en')" id="lang-en-mobile" class="font-bold hover:text-indigo-600">EN</button>
+            </div>
+        </div>
+    </div>
+
+    <header id="about" class="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] aspect-square bg-indigo-50/50 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[10%] right-[-5%] w-[30%] aspect-square bg-blue-50/50 rounded-full blur-[100px]"></div>
+    </div>
+    <div class="absolute inset-0 -z-20 opacity-[0.03]" style="background-image: radial-gradient(#171718 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-16 items-center relative">
+        <div class="md:col-span-7 text-center md:text-left">
+            <div class="flex flex-wrap justify-center md:justify-start gap-3 mb-6">
+                <span class="px-4 py-1 text-[10px] font-800 bg-indigo-600 text-white rounded-full border border-indigo-700 shadow-sm uppercase tracking-wider">
+                    Web Developer • IT Support • System Analyst
+                </span>
+                <span class="px-4 py-1 text-[10px] font-800 bg-indigo-50/80 backdrop-blur-sm rounded-full border border-indigo-100/50 text-indigo-700 uppercase">
+                    S1 Teknik Informatika
+                </span>
+                <span class="px-4 py-1 text-[10px] font-800 bg-white/50 backdrop-blur-sm rounded-full border border-slate-200/50 text-slate-500 italic flex items-center gap-1.5">
+                    <i class="fa-solid fa-house text-indigo-500"></i> Jakarta Timur, DKI Jakarta
+                </span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-800 text-slate-900 leading-[1.1] mb-8 tracking-tight">
+                Rivaldi <span class="text-indigo-600">Hidayatullah.</span>
+            </h1>
+            <p id="hero-desc" data-key="hero_desc" class="text-base md:text-lg text-slate-600/90 mb-10 leading-relaxed max-w-2xl text-justify [hyphens:auto] [text-justify:inter-word]">
+                Lulusan <strong>S1 Teknik Informatika</strong> dengan spesialisasi pengembangan web menggunakan <strong>PHP, JavaScript, Python dan MySQL</strong>.
+                Memiliki <strong>keahlian kuat dalam menganalisis alur bisnis</strong> untuk menciptakan solusi sistem yang efisien dan berkualitas. Saya merupakan pribadi yang 
+                berorientasi pada <strong>detail, adaptif, serta memiliki antusiasme tinggi</strong> untuk terus mempelajari teknologi terbaru. Dengan kombinasi kemampuan teknis 
+                dan analisis, saya siap berkontribusi sebagai <strong>Web Developer, IT System Analyst, maupun IT Support</strong> guna mendukung skalabilitas dan inovasi perusahaan 
+                di lingkungan yang dinamis.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+                <a data-key="car_history" href="#experience" class="px-8 py-4 bg-slate-900 text-white rounded-xl font-700 hover:bg-indigo-600 transition shadow-xl shadow-indigo-200/50 flex items-center justify-center gap-2">
+                    Career History
+                </a>
+                <a href="assets/docs/CV-Rivaldi-Hidayatullah.pdf" 
+                    download="CV_Rivaldi_Hidayatullah.pdf" 
+                    class="px-8 py-4 bg-white/70 backdrop-blur-md border border-slate-200 text-slate-700 rounded-xl font-700 hover:bg-white transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-download text-sm"></i>
+                    Download CV
+                </a>
+            </div>
+        </div>
+
+        <div class="md:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-[320px] md:max-w-[360px] group">
+                <div class="absolute -inset-4 bg-white/40 backdrop-blur-2xl rounded-[3.5rem] -z-10 border border-white/50 shadow-xl"></div>
+                
+                <div class="overflow-hidden rounded-[3rem] shadow-2xl border-[10px] border-white/80 transition-all duration-300 group-hover:rotate-1 shadow-indigo-500/10"
+                     style="aspect-ratio: 432 / 577;">
+                    <img id="profile-img" src="assets/img/profile.png" alt="Rivaldi" 
+                         class="w-full h-full object-cover cursor-zoom-in hover:scale-[1.05] transition-transform duration-500"
+                         onclick="openModal(this.src)">
+                </div>
+                
+                <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 hidden md:block group-hover:-translate-y-2 transition-transform duration-300">
+                    <p class="text-[10px] font-800 text-indigo-600 uppercase tracking-tighter">Availability</p>
+                    <p class="text-xs font-700 text-slate-900">Open for Work</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+    <div id="imageModal" class="fixed inset-0 z-[200] hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out" onclick="closeModal()">
+        <span class="absolute top-10 right-10 text-white text-5xl cursor-pointer hover:text-indigo-400 transition">&times;</span>
+        <img id="modalImg" class="max-w-[95%] max-h-[85vh] rounded-2xl shadow-2xl transform scale-95 transition-transform duration-300 border-4 border-white/20">
+    </div>
+    <section id="experience" class="py-24 bg-[#fafafa] dark:bg-slate-950 border-y border-slate-200 dark:border-slate-800 px-6 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+            <div>
+                <h2 data-key="exp_main_title" class="text-3xl md:text-4xl font-800 tracking-tighter text-slate-900 dark:text-white">
+                    Work & Internship <span class="text-indigo-600 dark:text-indigo-400 font-extrabold">Experience</span>
+                </h2>
+                <div class="h-1.5 w-20 bg-indigo-600 mt-2 rounded-full"></div>
+            </div>
+        </div>
+        
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+            <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-8 md:p-10 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden">
+                <div class="flex items-center gap-4 mb-12">
+                    <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 shadow-inner">
+                        <i class="fa-solid fa-briefcase text-lg"></i>
+                    </div>
+                    <h3 data-key="exp_sub_title" class="text-xl font-800 text-slate-900 dark:text-white uppercase tracking-tight">Professional Journey</h3>
+                </div>
+
+                <div class="relative space-y-12 before:absolute before:inset-y-0 before:left-[11px] before:w-[2px] before:bg-slate-100 dark:before:bg-slate-800">
+                    
+                    <div class="relative pl-10 group">
+                        <div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-white dark:bg-slate-900 border-2 border-indigo-600 dark:border-indigo-400 z-10 group-hover:scale-110 transition-transform"></div>
+                        <h3 class="text-lg font-800 text-slate-900 dark:text-white leading-tight">PT. Surya Fajar Indonesia (SFI)</h3>
+                        <p data-key="exp_1_role" class="text-indigo-600 dark:text-indigo-400 font-700 text-[11px] uppercase tracking-widest mt-1.5 mb-4">MAGANG KEMNAKER - IT System Analyst | Des 2025 - Jun 2026</p>
+                        <div class="space-y-3">
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_1_task1">Menganalisis dan menyelesaikan error sistem sesuai SLA untuk menjaga stabilitas operasional.</p>
+                            </div>
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_1_task2">Mengintegrasikan API dan melakukan validasi database guna memastikan akurasi data.</p>
+                            </div>
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_1_task3">Mengevaluasi dan mengoptimalkan flow bisnis agar lebih efisien serta efektif.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-10 group">
+                        <div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 z-10 group-hover:border-indigo-500 transition-colors"></div>
+                        <h3 class="text-lg font-800 text-slate-900 dark:text-white leading-tight">CV. Darma Bakti Mandiri</h3>
+                        <p data-key="exp_2_role" class="text-indigo-600 dark:text-indigo-400 font-700 text-[11px] uppercase tracking-widest mt-1.5 mb-4">Project Skripsi - Web Developer | Jan 2025 - Mei 2025</p>
+                        <div class="space-y-3">
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_2_task1">Mengembangkan sistem promosi produk berbasis web (PHP & MySQL) dengan fitur CMS, CRUD, dan integrasi media sosial untuk notifikasi order secara langsung.</p>
+                            </div>
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_2_task2">Berhasil meningkatkan efisiensi pengelolaan data dan memperluas jangkauan informasi perusahaan melalui platform digital terintegrasi.</p>
+                            </div>
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_2_task3">Menyelesaikan proyek tepat waktu menggunakan metode Agile.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-10 group">
+                        <div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 z-10 group-hover:border-indigo-500 transition-colors"></div>
+                        <h3 class="text-lg font-800 text-slate-900 dark:text-white leading-tight">PT. AEON Indonesia</h3>
+                        <p data-key="exp_3_role" class="text-indigo-600 dark:text-indigo-400 font-700 text-[11px] uppercase tracking-widest mt-1.5 mb-4">Cashier Retail | Des 2021 - Des 2024</p>
+                        <div class="space-y-3">
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_3_task1">Memproses transaksi harian dengan akurasi 99,9% tanpa selisih kas (zero discrepancy).</p>
+                            </div>
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_3_task2">Konsisten mencapai 105% target penjualan melalui upselling produk promosi dan program member.</p>
+                            </div>
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_3_task3">Mengelola keluhan secara profesional dan mempercepat waktu antrean hingga 15%.</p>
+                            </div>
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_3_task4">Melakukan rekonsiliasi kas dan pelaporan keuangan harian dengan tepat waktu dan akurat.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-10 group">
+                        <div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 z-10 group-hover:border-indigo-500 transition-colors"></div>
+                        <h3 class="text-lg font-800 text-slate-900 dark:text-white leading-tight">PT. Panca ESS Utama</h3>
+                        <p data-key="exp_4_role" class="text-indigo-600 dark:text-indigo-400 font-700 text-[11px] uppercase tracking-widest mt-1.5 mb-4">Magang - Mobile App Developer | April 2024 – Juni 2024</p>
+                        <div class="space-y-3">
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_4_task1">Mengembangkan prototipe aplikasi mobile menggunakan Flutter dan Firebase.</p>
+                            </div>
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_4_task2">Mengimplementasikan pengiriman data real-time untuk mempercepat sinkronisasi sistem.</p>
+                            </div>
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_4_task3">Melakukan testing dan debugging guna memastikan stabilitas aplikasi.</p>
+                            </div>
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_4_task4">Berkolaborasi dalam tim Agile untuk penyelesaian fitur tepat waktu.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-10 group">
+                        <div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 z-10 group-hover:border-indigo-500 transition-colors"></div>
+                        <h3 class="text-lg font-800 text-slate-900 dark:text-white leading-tight">SMK Tekno Multimedia</h3>
+                        <p data-key="exp_5_role" class="text-indigo-600 dark:text-indigo-400 font-700 text-[11px] uppercase tracking-widest mt-1.5 mb-4">Pengabdian Masyarakat (PKM) | Nov 2023</p>
+                        <div class="space-y-3">
+                            <div class="flex gap-3 items-start text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <i class="fa-solid fa-circle-check text-indigo-500 mt-1 flex-shrink-0"></i>
+                                <p data-key="exp_5_task1">Memberikan pelatihan teknis mengenai pengembangan web dasar kepada para siswa.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 space-y-8"> 
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                            <i class="fa-solid fa-graduation-cap text-base"></i>
+                        </div>
+                        <h3 data-key="edu_title" class="text-lg font-800 text-slate-900 dark:text-white uppercase tracking-tight">Education</h3>
+                    </div>
+                    <div class="pl-2">
+                        <h4 class="font-800 text-slate-900 dark:text-white text-base leading-tight">Universitas Pamulang</h4>
+                        <p class="text-slate-500 dark:text-slate-400 text-[11px] font-600 mt-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot text-indigo-400"></i> Tangerang Selatan, Banten
+                        </p>
+                        <p data-key="edu_major" class="text-indigo-600 dark:text-indigo-400 text-[11px] font-700 uppercase tracking-widest mt-3">S1 Teknik Informatika</p>                       
+                        <div class="mt-4 flex items-center gap-2 px-3 py-1.5 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border border-indigo-100 dark:border-indigo-900/50 w-fit">
+                            <span data-key="edu_detail" class="text-[10px] font-800 text-indigo-700 dark:text-indigo-300 uppercase tracking-tight">GPA 3.40 / 4.00 • Lulus Juli 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                            <i class="fa-solid fa-layer-group text-base"></i>
+                        </div>
+                        <h3 data-key="skill_title" class="text-lg font-800 text-slate-900 dark:text-white uppercase tracking-tight">Core Skills</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span data-key="skill_1" class="px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-xs font-700 text-slate-700 dark:text-slate-300">System Analyst</span>
+                        <span data-key="skill_2" class="px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-xs font-700 text-slate-700 dark:text-slate-300">Web Development</span>
+                        <span data-key="skill_3" class="px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-xs font-700 text-slate-700 dark:text-slate-300">MySQL & Database</span>
+                        <span data-key="skill_4" class="px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-xs font-700 text-slate-700 dark:text-slate-300">Business Process Analysis</span>
+                        <span data-key="skill_5" class="px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-xs font-700 text-slate-700 dark:text-slate-300">Microsoft Office</span>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm border-b-4 border-b-indigo-600">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                            <i class="fa-solid fa-award text-base"></i>
+                        </div>
+                        <h3 data-key="cert_title" class="text-lg font-800 text-slate-900 dark:text-white uppercase tracking-tight">Certification</h3>
+                    </div>
+                    <div class="group relative pl-4 border-l-2 border-indigo-600 dark:border-indigo-400">
+                        <h4 data-key="cert_1_name" class="text-sm font-800 text-slate-800 dark:text-white leading-tight uppercase">Sertifikasi Pemrograman</h4>
+                        <p data-key="cert_1_org" class="text-[10px] text-indigo-600 dark:text-indigo-400 font-800 uppercase mt-1">BNSP • 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="projects" class="py-24 px-6 bg-[#fafafa]">
+    <div class="max-w-7xl mx-auto">
+        <h2 data-key="proj_title" class="text-3xl md:text-4xl font-800 mb-16 tracking-tighter">Proyek Pilihan</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            
+            <article class="group bg-white p-3 md:p-4 rounded-[2rem] md:rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition duration-500 flex flex-col h-full">
+                <div class="project-slider-container mb-6 overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-slate-100 border-2 border-slate-950 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[8px_8px_0px_0px_rgba(79,70,229,1)] transition-all duration-300 relative">
+                    <div class="swiper mySwiper aspect-video w-full">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project1-1.png" data-fancybox="gallery-1">
+                                    <img src="assets/img/projects/project1-1.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project1-2.png" data-fancybox="gallery-1">
+                                    <img src="assets/img/projects/project1-2.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project1-3.png" data-fancybox="gallery-1">
+                                    <img src="assets/img/projects/project1-3.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project1-4.png" data-fancybox="gallery-1">
+                                    <img src="assets/img/projects/project1-4.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project1-5.png" data-fancybox="gallery-1">
+                                    <img src="assets/img/projects/project1-5.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next !text-slate-950 !after:text-[12px] !font-bold !w-8 !h-8 bg-white/90 backdrop-blur border border-slate-950 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+                        <div class="swiper-button-prev !text-slate-950 !after:text-[12px] !font-bold !w-8 !h-8 bg-white/90 backdrop-blur border border-slate-950 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+                        <div class="swiper-pagination !bottom-4"></div>
+                    </div>
+                </div>
+                <div class="px-3 pb-4 flex flex-col flex-grow">
+                    <h3 data-key="proj_1_name" class="text-xl md:text-2xl font-800 mb-3 group-hover:text-indigo-600 transition italic leading-tight">Sistem Promosi Produk Digital</h3>
+                    <p data-key="proj_1_desc" class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow text-justify [hyphens:auto]">Aplikasi web berbasis PHP & MySQL untuk manajemen promosi dan otomasi notifikasi order serta telah terintegrasi dengan Google Maps (Project Skripsi).</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">PHP</span>
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">Bootstrap</span>
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">MySQL</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="group bg-white p-3 md:p-4 rounded-[2rem] md:rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition duration-500 flex flex-col h-full">
+                <div class="project-slider-container mb-6 overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-slate-100 border-2 border-slate-950 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[8px_8px_0px_0px_rgba(79,70,229,1)] transition-all duration-300 relative">
+                    <div class="swiper mySwiper aspect-video w-full">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project2-1.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project2-1.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project2-2.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project2-2.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project2-3.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project2-3.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project2-4.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project2-4.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project2-5.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project2-5.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next !text-slate-950 !after:text-[12px] !font-bold !w-8 !h-8 bg-white/90 backdrop-blur border border-slate-950 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+                        <div class="swiper-button-prev !text-slate-950 !after:text-[12px] !font-bold !w-8 !h-8 bg-white/90 backdrop-blur border border-slate-950 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+                        <div class="swiper-pagination !bottom-4"></div>
+                    </div>
+                </div>
+                <div class="px-3 pb-4 flex flex-col flex-grow">
+                    <h3 data-key="proj_2_name" class="text-xl md:text-2xl font-800 mb-3 group-hover:text-indigo-600 transition italic leading-tight">Aplikasi Web Manajemen Laundry</h3>
+                    <p data-key="proj_2_desc" class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow text-justify [hyphens:auto]">Laundry Cerdas adalah solusi digital berbasis web yang dirancang untuk mengotomatisasi operasional bisnis laundry secara end-to-end. Aplikasi ini mengintegrasikan manajemen inventaris, pelacakan status pakaian, hingga sistem pembayaran (billing) dalam satu platform yang efisien.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">Bootstrap</span>
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">MySQL</span>
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">PHP</span>
+                    </div>
+                </div>
+            </article>
+            <article class="group bg-white p-3 md:p-4 rounded-[2rem] md:rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition duration-500 flex flex-col h-full">
+                <div class="project-slider-container mb-6 overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-slate-100 border-2 border-slate-950 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[8px_8px_0px_0px_rgba(79,70,229,1)] transition-all duration-300 relative">
+                    <div class="swiper mySwiper aspect-video w-full">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project3-1.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project3-1.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project3-2.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project3-2.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project3-3.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project3-3.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project3-4.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project3-4.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next !text-slate-950 !after:text-[12px] !font-bold !w-8 !h-8 bg-white/90 backdrop-blur border border-slate-950 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+                        <div class="swiper-button-prev !text-slate-950 !after:text-[12px] !font-bold !w-8 !h-8 bg-white/90 backdrop-blur border border-slate-950 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+                        <div class="swiper-pagination !bottom-4"></div>
+                    </div>
+                </div>
+                <div class="px-3 pb-4 flex flex-col flex-grow">
+                    <h3 data-key="proj_3_name" class="text-xl md:text-2xl font-800 mb-3 group-hover:text-indigo-600 transition italic leading-tight">Apotek21</h3>
+                    <p data-key="proj_3_desc" class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow text-justify [hyphens:auto]">Sistem informasi manajemen apotek terintegrasi untuk pengelolaan stok, transaksi, dan laporan keuangan secara efisien.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">Bootstrap</span>
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">Python</span>
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">PHP</span>
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">MySQL</span>
+                    </div>
+                </div>
+            </article>
+            <article class="group bg-white p-3 md:p-4 rounded-[2rem] md:rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition duration-500 flex flex-col h-full">
+                <div class="project-slider-container mb-6 overflow-hidden rounded-[1.5rem] md:rounded-[2rem] bg-slate-100 border-2 border-slate-950 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-[8px_8px_0px_0px_rgba(79,70,229,1)] transition-all duration-300 relative">
+                    <div class="swiper mySwiper aspect-video w-full">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project4-1.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project4-1.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project4-2.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project4-2.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project4-3.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project4-3.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project4-4.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project4-4.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="assets/img/projects/project4-5.png" data-fancybox="gallery-2">
+                                    <img src="assets/img/projects/project4-5.png" class="w-full h-full object-cover cursor-zoom-in">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next !text-slate-950 !after:text-[12px] !font-bold !w-8 !h-8 bg-white/90 backdrop-blur border border-slate-950 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+                        <div class="swiper-button-prev !text-slate-950 !after:text-[12px] !font-bold !w-8 !h-8 bg-white/90 backdrop-blur border border-slate-950 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+                        <div class="swiper-pagination !bottom-4"></div>
+                    </div>
+                </div>
+                <div class="px-3 pb-4 flex flex-col flex-grow">
+                    <h3 data-key="proj_4_name" class="text-xl md:text-2xl font-800 mb-3 group-hover:text-indigo-600 transition italic leading-tight">MC Official</h3>
+                    <p data-key="proj_4_desc" class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow text-justify [hyphens:auto]">Web MC Official dibuat dengan model yang modern dan dinamis agar user nyaman dalam menggunakannya serta sebagai penyampaian informasi 
+                        mengenai jasa MC Event dan Bouqet product untuk hadiah kepada orang terdekat anda.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">HTML</span>
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">Tailwind</span>
+                        <span class="text-[9px] md:text-[10px] font-800 text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg uppercase tracking-wider">JavaScript</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+<footer id="contact" class="py-24 bg-slate-950 text-white px-6 relative overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
+        <div class="absolute top-[-20%] left-[10%] w-[30%] aspect-square bg-indigo-600/10 rounded-full blur-[120px]"></div>
+    </div>
+    <div class="max-w-7xl mx-auto text-center relative">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-800 uppercase tracking-widest mb-8">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span data-key="footer_status">Open for Opportunities</span>
+        </div>
+
+        <h2 data-key="footer_title" class="text-4xl md:text-6xl font-800 mb-6 tracking-tighter">
+            Ready to <span class="text-indigo-500">Contribute.</span>
+        </h2>
+        
+        <p data-key="footer_desc" class="text-slate-400 mb-12 max-w-lg mx-auto font-medium leading-relaxed">
+            Saya terbuka untuk peluang kerja sebagai <strong>IT System Analyst</strong>, <strong>Web Developer</strong>, maupun <strong>IT Support</strong>. Mari berkolaborasi!
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-20">
+    <a href="mailto:rivaldihidayatullah00@gmail.com" 
+       id="contact-email"
+       class="group flex items-center justify-center w-16 h-16 bg-slate-900 border border-slate-800 rounded-2xl hover:border-indigo-500 hover:bg-indigo-600/10 transition-all duration-300 relative z-[110]" 
+       title="Email Rivaldi">
+        <i class="fa-regular fa-envelope text-xl text-slate-400 group-hover:text-indigo-400 group-hover:scale-110 transition-transform"></i>
+    </a>
+
+    <a href="https://wa.me/6282189004392" target="_blank" rel="noopener noreferrer"
+       class="group flex items-center justify-center w-16 h-16 bg-slate-900/50 backdrop-blur-xl border border-slate-800 rounded-2xl hover:border-emerald-500 hover:bg-emerald-600/10 transition-all duration-300" title="WhatsApp">
+        <i class="fa-brands fa-whatsapp text-2xl text-slate-400 group-hover:text-emerald-400 group-hover:scale-110 transition-transform"></i>
+    </a>
+
+    <a href="https://instagram.com/rivaldi.hdyt22" target="_blank" rel="noopener noreferrer"
+       class="group flex items-center justify-center w-16 h-16 bg-slate-900/50 backdrop-blur-xl border border-slate-800 rounded-2xl hover:border-rose-500 hover:bg-rose-600/10 transition-all duration-300" title="Instagram">
+        <i class="fa-brands fa-instagram text-xl text-slate-400 group-hover:text-rose-400 group-hover:scale-110 transition-transform"></i>
+    </a>
+
+    <a href="https://linkedin.com/in/rivaldihidayatullah" target="_blank" rel="noopener noreferrer"
+       class="group flex items-center justify-center w-16 h-16 bg-slate-900/50 backdrop-blur-xl border border-slate-800 rounded-2xl hover:border-blue-500 hover:bg-blue-600/10 transition-all duration-300" title="LinkedIn">
+        <i class="fa-brands fa-linkedin-in text-xl text-slate-400 group-hover:text-blue-400 group-hover:scale-110 transition-transform"></i>
+    </a>
+
+    <a href="https://github.com/Codejaya" target="_blank" rel="noopener noreferrer"
+       class="group flex items-center justify-center w-16 h-16 bg-slate-900/50 backdrop-blur-xl border border-slate-800 rounded-2xl hover:border-white hover:bg-white/10 transition-all duration-300" title="GitHub">
+        <i class="fa-brands fa-github text-xl text-slate-400 group-hover:text-white group-hover:scale-110 transition-transform"></i>
+    </a>
+</div>
+
+        <div class="pt-12 border-t border-slate-900/50">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-slate-500 text-[10px] font-700 tracking-[0.3em] uppercase">
+                    © 2026 Rivaldi Hidayatullah • All Rights Reserved
+                </p>
+                <div class="flex gap-6 text-[10px] font-800 text-slate-600 uppercase tracking-widest">
+                    <span data-key="footer_tag_1" class="hover:text-indigo-500 cursor-default transition">Quality</span>
+                    <span data-key="footer_tag_2" class="hover:text-indigo-500 cursor-default transition">Efficiency</span>
+                    <span data-key="footer_tag_3" class="hover:text-indigo-500 cursor-default transition">Innovation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+    <script>
+        // 1. Inisialisasi Swiper untuk Project Slider
+        const swiper = new Swiper(".mySwiper", {
+            loop: true,
+            grabCursor: true,
+            autoplay: { 
+                delay: 4000, 
+                disableOnInteraction: false 
+            },
+            pagination: { 
+                el: ".swiper-pagination", 
+                clickable: true 
+            },
+            // Tambahkan ini agar tombol slide berfungsi
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+        // 2. Inisialisasi Fancybox (Fitur Klik Gambar Zoom)
+        Fancybox.bind("[data-fancybox]", {
+            // Pengaturan tambahan jika diperlukan
+            Toolbar: {
+                display: {
+                    left: ["infobar"],
+                    middle: [],
+                    right: ["iterateZoom", "slideshow", "fullScreen", "download", "thumbs", "close"],
+                },
+            },
+        });
+
+        // 3. Fungsi Lightbox Foto Profil (Manual Modal)
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            if (modal && modalImg) {
+                modal.classList.remove('hidden');
+                modalImg.src = src;
+                document.body.style.overflow = 'hidden';       
+                setTimeout(() => {
+                    modalImg.classList.remove('scale-95');
+                    modalImg.classList.add('scale-100');
+                }, 10);
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            if (modal && modalImg) {
+                modalImg.classList.remove('scale-100');
+                modalImg.classList.add('scale-95');       
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }, 200);
+            }
+        }
+
+        // Close modal dengan ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") closeModal();
+        });
+
+        // 4. Logika Back to Top
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'invisible', 'translate-y-10');
+                backToTop.classList.add('opacity-100', 'visible', 'translate-y-0');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible', 'translate-y-10');
+                backToTop.classList.remove('opacity-100', 'visible', 'translate-y-0');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-indigo-600 text-white rounded-xl shadow-2xl flex items-center justify-center opacity-0 invisible translate-y-10 transition-all duration-500 z-[200] hover:bg-slate-900 group">
+        <div class="absolute -inset-2 bg-indigo-600 rounded-xl blur-lg opacity-20 group-hover:bg-slate-900 transition-all"></div>
+        <i class="fa-solid fa-arrow-up text-lg relative z-10 group-hover:-translate-y-1 transition-transform"></i>
+    </button>
+
+    <script src="assets/js/language.js"></script>
+    <script src="assets/js/main.js"></script> 
+</body>
+</html>
